@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+hall_of_fame_size = 10
 one_max_length = 100
 population_size = 200
 probability_crossover = 0.9
@@ -29,7 +30,7 @@ def oneMaxFitness(individual):
 toolbox.register("evaluate", oneMaxFitness)
 toolbox.register("select", tools.selTournament, tournsize=3)
 toolbox.register("mate", tools.cxOnePoint)
-toolbox.register("mutate", tools.mutFlipBit, indpb = 1.0/one_max_length)
+toolbox.register("mutate", tools.mutFlipBit, indpb=1.0/one_max_length)
 
 
 def low_lvl_implementation():
@@ -93,11 +94,17 @@ def high_lvl_implementation():
     stats.register("max", np.max)
     stats.register("avg", np.mean)
 
+    hof = tools.HallOfFame(hall_of_fame_size)
     population, logbook = algorithms.eaSimple(population, toolbox, cxpb=probability_crossover,
                                               mutpb=probability_mutation, ngen=max_generations,
-                                              stats=stats, verbose=True)
+                                              stats=stats,
+                                              halloffame=hof,
+                                              verbose=True)
 
     maxFitnessValues, meanFitnessValues = logbook.select("max", "avg")
+
+    print("Hall of fame individuals = {} \n".format(*hof.items))
+    print("Best individual {}".format(hof.items[0]))
 
     plt.plot(maxFitnessValues, color="red")
     plt.plot(meanFitnessValues, color="green")
