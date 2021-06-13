@@ -1,5 +1,5 @@
 from deap import base, creator, tools, algorithms
-from CSP.knapsack_helper_class import Knapsack01Problem
+from ComOp.knapsack_helper_class import Knapsack01Problem
 import random
 import matplotlib.pyplot as plt
 import numpy as np

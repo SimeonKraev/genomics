@@ -1,11 +1,11 @@
-from CSP.tsp_helper_class import TravelingSalesmanProblem
+from ComOp.tsp_helper_class import TravelingSalesmanProblem
 from deap import base, creator, tools, algorithms
 import random
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import array
-from CSP import elitism
+from ComOp import elitism
 
 TSP_NAME = "bayg29"
 tsp = TravelingSalesmanProblem(TSP_NAME)
